@@ -142,7 +142,6 @@ void App::SetBallSpeed(int x, int y, int px, int py) {
 	
 	ballvx = abs(cos(angle)) * (((x - px) > 0) ? 1 : -1) * BALL_SPEED;
 	ballvy = -sin(angle) * BALL_SPEED;
-	cout << ballvx << " " << ballvy << "\n";
 }
 
 bool App::CollisionCheck(int newx, int newy, int paddle_x, int paddle_y) {
