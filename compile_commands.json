@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/haxala1r/Desktop/Programming/C++/pong/build",
+  "command": "/usr/bin/c++  -I/usr/include/SDL2 -I/home/haxala1r/Desktop/Programming/C++/pong/./src/include  -o CMakeFiles/pong.dir/src/main.cpp.o -c /home/haxala1r/Desktop/Programming/C++/pong/src/main.cpp",
+  "file": "/home/haxala1r/Desktop/Programming/C++/pong/src/main.cpp"
+}
+]
