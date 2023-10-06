@@ -22,7 +22,6 @@ using std::abs;
 using std::sin;
 using std::cos;
 using std::string;
-using std::cout; /* testing - remove later. */
 
 App::App(int scrw, int scrh) {
 	/* main is responsible for calling SDL_Init */
@@ -102,14 +101,28 @@ void App::RenderText(string text, int x, int y) {
 
 void App::DrawScores() {
 	RenderText(std::to_string(score_left), 240, 20);
-	RenderText(std::to_string(score_right), screen_width - 240, 20);
+	RenderText(std::to_string(score_right), screen_width - 270, 20);
 }
 
 void App::DrawGame() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
+	SDL_RenderDrawLine(renderer, screen_width / 2, 0, screen_width / 2, screen_height);
 	DrawPaddles();
-	DrawBall();
+	switch (status) {
+	case LeftWon:
+		RenderText("You win!", 100, 100);
+		RenderText("You lose!",500, 100);
+		break;
+	case RightWon:
+		RenderText("You lose!", 100, 100);
+		RenderText("You win!", 500, 100);
+		break;
+	default:
+		DrawBall();
+		break;
+	}
 	DrawScores();
 }
 
@@ -206,9 +219,9 @@ void App::GameTick() {
 	ballx = newx;
 	bally = newy;
 	if (ballx < 0) {
-		status = (score_right >= 9) ? RightWon : RightScored ;
+		status = (score_right++ >= 9) ? RightWon : RightScored ;
 	} else if (ballx > screen_width) {
-		status = (score_left >= 9) ? LeftWon : LeftScored;
+		status = (score_left++ >= 9) ? LeftWon : LeftScored;
 	} else {
 		status = KeepGoing;
 	}
@@ -257,14 +270,12 @@ void App::GameLoop() {
 				ResetBall();
 				break;
 			case LeftWon:
-				return;
 				break;
 			case RightScored:
 				score_right += 1;
 				ResetBall();
 				break;
 			case RightWon:
-				return;
 				break;
 			case KeepGoing: // FALLTHROUGH
 			default:

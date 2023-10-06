@@ -9,6 +9,7 @@ find_package(SDL2 REQUIRED)
 # I could use pkg-config, but that would not be truly cross-platform.
 find_library(SDL2_ttf NAMES SDL2_ttf)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(pong src/main.cpp src/app.cpp src/geometry.cpp)
 target_include_directories(pong PRIVATE ${SDL2_INCLUDE_DIRS} "./src/include/")
