@@ -12,7 +12,7 @@
 
 
 #define BALL_R 5
-#define BALL_SPEED 10
+#define BALL_SPEED 13
 #define PADDLE_HEIGHT 80
 #define PADDLE_WIDTH 10
 #define PADDLE_X 20
